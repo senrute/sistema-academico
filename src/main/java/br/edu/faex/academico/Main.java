@@ -43,6 +43,18 @@ public class Main {
         } else {
             System.out.println("Aluno não encontrado!");
         }
+
+        // Excluir aluno pelo ID
+        controller.excluir(1L);
+        // Listar alunos após a exclusão
+        System.out.println("\n===== ALUNOS APÓS EXCLUSÃO =====");
+        List<Aluno> alunos1 = controller.listar();
+        for (Aluno alunot : alunos) {
+            System.out.println("ID: " + alunot.getId());
+            System.out.println("Nome: " + alunot.getNome());
+            System.out.println("E-mail: " + alunot.getEmail());
+            System.out.println("--------------------------");
+        }
     }
 
 }
