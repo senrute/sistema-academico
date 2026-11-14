@@ -32,4 +32,6 @@ public class Curso {
     public void setModalidade(String modalidade) {
         this.modalidade = modalidade;
     }
+
+    public void setId(Long id) {this.id = id;}
 }

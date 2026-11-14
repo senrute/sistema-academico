@@ -109,16 +109,35 @@ public class AlunoRepository {
         }
     }
 
-    public void atualizar(Aluno alunoEditado){
-        for (Aluno aluno : alunos){
-            if(aluno.getId().equals(alunoEditado.getId())){
-                    aluno.setNome(alunoEditado.getNome());
-                    aluno.setEmail(alunoEditado.getEmail());
-                return;
+
+    public void atualizar(Aluno alunoEditado) {
+
+        String sql = "UPDATE alunos SET nome = ?, email = ?, ativo = ? WHERE id = ?";
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement comando = conexao.prepareStatement(sql);
+
+            comando.setString(1, alunoEditado.getNome());
+            comando.setString(2, alunoEditado.getEmail());
+            comando.setBoolean(3, alunoEditado.isAtivo());
+            comando.setLong(4, alunoEditado.getId());
+
+            int linhasAfetadas = comando.executeUpdate();
+
+            comando.close();
+            conexao.close();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Aluno atualizado com sucesso!");
+            } else {
+                System.out.println("Aluno não encontrado.");
             }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar aluno: " + e.getMessage());
         }
     }
-
 
 
 }
